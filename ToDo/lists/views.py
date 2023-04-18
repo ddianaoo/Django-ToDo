@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import *
 
 
 def get_lists(request):
-    render(request, 'get_lists.html', {'title': 'My lists'})
+    lists = List.objects.all()
+    return render(request, 'lists/get_lists.html', {'title': 'My lists', 'lists': lists})

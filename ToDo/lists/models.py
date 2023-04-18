@@ -6,7 +6,7 @@ class List(models.Model):
     title = models.CharField(max_length=150, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
     is_done = models.BooleanField(default=False)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Task(models.Model):
     desc = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    list = models.ForeignKey(List, on_delete=models.CASCADE)
+    list = models.ForeignKey(List, on_delete=models.CASCADE, blank=False)
     is_done = models.BooleanField(default=False)
 
     class Meta:

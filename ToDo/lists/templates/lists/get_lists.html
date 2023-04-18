@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<h1>HEEELOOOO</h1>
+{% for list in lists %}
+{{ list.title }}
+{{ list.created_at }}
+{% endfor %}
+{% endblock %}
