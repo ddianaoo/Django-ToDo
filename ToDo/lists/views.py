@@ -4,13 +4,12 @@ from .forms import *
 
 
 def index(request):
-    if request.user.is_authenticated:
-        return redirect('lists')
-    return redirect('signin')
+    return render(request, 'home.html')
 
 
 def get_lists(request):
-    lists = List.objects.all()
+    user = request.user
+    lists = List.objects.filter(user__id=user.id)
     return render(request, 'lists/get_lists.html', {'title': 'My notes', 'lists': lists})
 
 
@@ -20,23 +19,17 @@ def list_delete(request, id):
     return redirect('lists')
 
 
-# class AddNews(CreateView):
-#     form_class = ListForm
-#     template_name = 'lists/list_create.html'
-
 def list_create(request):
-    # user = request.user
-    # user = user.id
     if request.method == 'POST':
         print(request.POST)
-        form = ListForm(request.POST, initial={'user': 1 })
+        form = ListForm(request.POST, initial={'user': request.user.id})
         if form.is_valid():
             form.save()
             return redirect('lists')
         else:
             print('Error')
     else:
-        form = ListForm(initial={'user': 1})
+        form = ListForm(initial={'user': request.user.id})
     return render(request, 'lists/list_create.html', {'form': form})
 
 

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>ToDo Lists</h2>
+<p style="font-size:26px">Notes is a good helper to manage your schedules and notes. It gives you a quick and simple
+    notepad editing experience
+    when you write notes, memo, email, message, shopping list and to do list. It makes to take a note easier than any
+    other notepad and memo apps.</p>
+<img src="https://images.ctfassets.net/lzny33ho1g45/5iJ10OKtmYa4BZpYvhb2xw/e890aa9115b53ef2d41c9135902285a2/Best_note_taking_apps.jpg?w=1520&fm=jpg&q=30&fit=thumb&h=760" width="1140px" height="570px" alt="">
+<h4>To try this site you must <a href="{% url 'signin' %}">login</a></h4>
+{% endblock %}
