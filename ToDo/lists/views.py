@@ -4,6 +4,9 @@ from .forms import *
 from django.views.generic import CreateView
 
 
+def index(request):
+    pass
+
 def get_lists(request):
     lists = List.objects.all()
     return render(request, 'lists/get_lists.html', {'title': 'My notes', 'lists': lists})
