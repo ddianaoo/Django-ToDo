@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New List Of Tasks{% endblock %}
+
+{% block content %}
+<h2>Create New List Of Tasks</h2>
+<br>
+
+<form method="POST"  action="">
+    {% csrf_token %}
+    {{ form.user.as_hidden }}
+    {{ form.title }}
+    <br>
+    <button type="submit" style="color:white; background-color: black; border: black;" class="btn btn-primary">Create</button>
+
+</form>
+{% endblock %}

@@ -3,9 +3,13 @@
 
 {% block content %}
 <h1>{{title}}</h1>
+<a href="{% url 'list_create' %}" class="btn btn-success" style="float: right;">Create New One</a>
 <ol>
 {% for list in lists %}
-    <li><a href="{% url 'tasks' list.pk %}">{{ list.title }}</a></li>
+    <li>
+        <a href="{% url 'tasks' list.pk %}">{{ list.title }}</a>
+        <a href="{% url 'list_delete' list.pk %}" class="btn btn-danger">Delete</a>
+    </li>
 {% endfor %}
 </ol>
 {% endblock %}
