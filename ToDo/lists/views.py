@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
-from django.views.generic import CreateView
 
 
 def index(request):
-    pass
+    if request.user.is_authenticated:
+        return redirect('lists')
+    return redirect('signin')
+
 
 def get_lists(request):
     lists = List.objects.all()
