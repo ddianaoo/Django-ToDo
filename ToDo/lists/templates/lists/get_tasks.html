@@ -4,8 +4,8 @@
 {% block content %}
 <h1>{{title}}</h1>
 <ol>
-{% for list in lists %}
-    <li><a href="{% url 'tasks' list.pk %}">{{ list.title }}</a></li>
+{% for task in tasks %}
+<li>{{ task.title }}</li>
 {% endfor %}
-</ol>
+    </ol>
 {% endblock %}

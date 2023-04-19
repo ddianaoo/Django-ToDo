@@ -25,7 +25,7 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return f"Task name: {self.title} of {self.list}"
