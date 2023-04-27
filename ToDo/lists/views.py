@@ -86,3 +86,15 @@ def change_task(request, list_id, task_id):
             messages.error(request, form.errors)
     form = ChangeTaskForm(initial={'title': task.title, 'is_done': task.is_done, 'list': task.list}, instance=task)
     return render(request, 'lists/change_task.html', {'form': form, 'list_id': list_id})
+
+
+def delete_task(request, list_id, task_id):
+
+    try:
+        task = Task.objects.get(pk=task_id)
+        task.delete()
+    except:
+        messages.error(request, 'Lose to delete this task!')
+    else:
+        messages.success(request, 'Task was successfully deleted!')
+    return redirect('tasks', list_id)

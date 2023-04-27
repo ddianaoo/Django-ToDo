@@ -2,6 +2,7 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
+<a href="{% url 'list_delete' id %}" class="btn btn-danger" style="float: right;">Delete</a>
 <h1>{{title}}</h1>
 {% if tasks %}
 <ol>
@@ -19,5 +20,5 @@
 {% else %}
 <p>You haven`t added any task for this list yet!</p>
 {% endif %}
-<a href="{% url 'add_task' id %}" style="color:white; background-color: black; border: black;" class="btn btn-primary">Add task</a>
+<a href="{% url 'add_task' id %}" class="btn btn-success">Add task</a>
 {% endblock %}

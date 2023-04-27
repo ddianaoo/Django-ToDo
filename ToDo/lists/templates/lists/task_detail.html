@@ -9,14 +9,15 @@
         <h3 class="card-title">{{task.title}}</h3>
 
         {% if task.is_done %}
-        <h6 class="card-subtitle mb-2" style="color: green">Done</h6>
+        <h6 class="card-subtitle mb-2" style="color: green">done</h6>
         {% else %}
-        <h6 class="card-subtitle mb-2" style="color: red">Didn`t done</h6>
+        <h6 class="card-subtitle mb-2" style="color: red">not done</h6>
         {% endif %}
 
         <p class="card-text">{{ task.desc }}</p>
         <p class="card-text text-muted">{{ task.created_at }}</p>
-        <a href="{% url 'change_task' list_id task.id %}" style="color:white; background-color: black; border: black;" class="btn btn-primary">Change</a>
+        <a href="{% url 'change_task' list_id task.id %}" class="btn btn-warning">Change</a>
+        <a href="{% url 'delete_task' list_id task.id %}" class="btn btn-danger">Delete</a>
     </div>
 </div>
 
