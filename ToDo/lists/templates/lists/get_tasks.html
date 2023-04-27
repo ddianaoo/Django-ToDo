@@ -3,9 +3,21 @@
 
 {% block content %}
 <h1>{{title}}</h1>
+{% if tasks %}
 <ol>
 {% for task in tasks %}
-<li>{{ task.title }}</li>
+<li>
+    {{ task.title }}
+    {% if task.is_done %}
+    <span style="color: green">Done</span>
+    {% else %}
+    <span style="color: red">Didn`t done</span>
+    {% endif %}
+</li>
 {% endfor %}
-    </ol>
+</ol>
+{% else %}
+<p>You haven`t added any task for this list yet!</p>
+{% endif %}
+<a href="{% url 'add_task' id %}" style="color:white; background-color: black; border: black;" class="btn btn-primary">Add task</a>
 {% endblock %}
