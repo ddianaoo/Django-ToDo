@@ -7,7 +7,7 @@
 <ol>
 {% for task in tasks %}
 <li>
-    {{ task.title }}
+    <a href="{% url 'task' id task.id %}">{{ task.title }}</a>
     {% if task.is_done %}
     <span style="color: green">Done</span>
     {% else %}

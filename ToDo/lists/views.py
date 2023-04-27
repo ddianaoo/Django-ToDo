@@ -62,3 +62,27 @@ def add_task(request, id):
     else:
         form = TaskForm(initial={'list': id})
         return render(request, 'lists/task_create.html', {'form': form})
+
+
+def task_details(request, list_id, task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+    except:
+        messages.error(request, 'You haven`t added this task yet!')
+        return redirect('tasks', id)
+
+    return render(request, 'lists/task_detail.html', {'task': task, 'list_id': list_id})
+
+
+def change_task(request, list_id, task_id):
+    task = Task.objects.get(pk=task_id)
+
+    if request.method == 'POST':
+        form = ChangeTaskForm(request.POST, initial={'title': task.title, 'is_done': task.is_done, 'list': task.list}, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task', list_id, task_id)
+        else:
+            messages.error(request, form.errors)
+    form = ChangeTaskForm(initial={'title': task.title, 'is_done': task.is_done, 'list': task.list}, instance=task)
+    return render(request, 'lists/change_task.html', {'form': form, 'list_id': list_id})

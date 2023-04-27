@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Change Task{% endblock %}
+
+{% block content %}
+<h2>Change Task</h2>
+<br>
+
+<form method="POST"  action="">
+    {% csrf_token %}
+    {{ form.list.as_hidden }}
+    {{ form.title.label }}{{ form.title }}
+    {{ form.desc.label }}{{ form.desc }}
+    <br>
+    {{ form.is_done.label }}{{ form.is_done }}
+    <br>
+    <br>
+    <button type="submit" style="color:white; background-color: black; border: black;" class="btn btn-primary">Change</button>
+
+</form>
+{% endblock %}
