@@ -10,6 +10,7 @@
     {% csrf_token %}
     {{ form.list.as_hidden }}
     {{ form.title.label }}{{ form.title }}
+    {{ form.at_time.label }}{{ form.at_time }}
     {{ form.desc.label }}{{ form.desc }}
     {{ form.photo.label }}{{ form.photo }}
     <br>

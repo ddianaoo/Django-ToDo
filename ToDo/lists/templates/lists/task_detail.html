@@ -6,8 +6,7 @@
 
 <div class="card" style="width: 36rem;">
     <div class="card-body">
-        <h3 class="card-title">{{task.title}}</h3>
-
+        <h3 class="card-title">{{task.title}} -- {{task.at_time}}</h3>
         {% if task.is_done %}
         <h6 class="card-subtitle mb-2" style="color: green">done</h6>
         {% else %}

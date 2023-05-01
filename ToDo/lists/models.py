@@ -24,6 +24,7 @@ class Task(models.Model):
     list = models.ForeignKey(List, on_delete=models.CASCADE, blank=False)
     is_done = models.BooleanField(default=False)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    at_time = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
 
     class Meta:
         ordering = ['created_at']

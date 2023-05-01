@@ -20,7 +20,7 @@
     <tr>
 
         <td><a href="{% url 'task' id task.id %}">{{ task.title }}</a></td>
-        <td>{{ task.created_at|date:"Y-m-d H:i" }}</td>
+        <td>{{ task.created_at|date:"Y-m-d" }}</td>
         <td>
             <span>
             <a href="{% url 'change_task' id task.id %}" class="btn btn-warning">Change</a>
