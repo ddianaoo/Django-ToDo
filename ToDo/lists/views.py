@@ -54,7 +54,7 @@ def get_tasks(request, id):
 
 def add_task(request, id):
     if request.method == 'POST':
-        form = TaskForm(request.POST, initial={'list': id})
+        form = TaskForm(request.POST, request.FILES, initial={'list': id})
         if form.is_valid():
             form.save()
             messages.success(request, 'New task was successfully created!')

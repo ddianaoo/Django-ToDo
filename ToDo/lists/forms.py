@@ -16,10 +16,11 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'desc', 'list']
+        fields = ['title', 'desc', 'list', 'photo']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'desc': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+            'photo': forms.FileInput(attrs={'class': 'form-control'})
         }
 
 
@@ -30,6 +31,7 @@ class ChangeTaskForm(forms.ModelForm):
     # updated_at = models.DateTimeField(auto_now=True)
     # list = models.ForeignKey(List, on_delete=models.CASCADE, blank=False)
     # is_done = models.BooleanField(default=False)
+    # photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
 
     class Meta:
         model = Task

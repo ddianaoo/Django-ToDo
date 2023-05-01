@@ -13,7 +13,11 @@
         {% else %}
         <h6 class="card-subtitle mb-2" style="color: red">not done</h6>
         {% endif %}
-
+        
+        {% if task.photo %}
+        <img src="{{ task.photo.url }}"  width="500px">
+        {% endif %}
+        
         <p class="card-text">{{ task.desc }}</p>
         <p class="card-text text-muted">{{ task.created_at }}</p>
         <a href="{% url 'change_task' list_id task.id %}" class="btn btn-warning">Change</a>

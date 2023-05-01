@@ -6,11 +6,12 @@
 <h2>Create New Task</h2>
 <br>
 
-<form method="POST"  action="">
+<form method="POST"  action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.list.as_hidden }}
     {{ form.title.label }}{{ form.title }}
     {{ form.desc.label }}{{ form.desc }}
+    {{ form.photo.label }}{{ form.photo }}
     <br>
     <button type="submit" class="btn btn-success">Add</button>
 

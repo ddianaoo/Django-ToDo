@@ -3,6 +3,7 @@
 
 {% block content %}
 <h1>{{title}}</h1>
+{% if lists %}
 <ol>
 {% for list in lists %}
     <li>
@@ -11,4 +12,7 @@
     <br>
 {% endfor %}
 </ol>
+{% else %}
+<p>You don`t have any notes!<a href="{% url 'list_create' %}"> Create first</a></p>
+{% endif %}
 {% endblock %}

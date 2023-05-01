@@ -23,6 +23,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE, blank=False)
     is_done = models.BooleanField(default=False)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
 
     class Meta:
         ordering = ['created_at']
