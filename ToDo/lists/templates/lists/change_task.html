@@ -9,12 +9,12 @@
 <form method="POST"  action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.list.as_hidden }}
-    {{ form.title.label }}{{ form.title }}
-    {{ form.at_time.label }}{{ form.at_time }}
-    {{ form.desc.label }}{{ form.desc }}
-    {{ form.photo.label }}{{ form.photo }}
+    {{ form.title.label }}:{{ form.title }}
+    {{ form.at_time.label }}:{{ form.at_time }}
+    {{ form.desc.label }}:{{ form.desc }}
+    {{ form.photo.label }}:{{ form.photo }}
     <br>
-    {{ form.is_done.label }}{{ form.is_done }}
+    {{ form.is_done.label }}: {{ form.is_done }}
     <br>
     <br>
     <button type="submit" class="btn btn-warning">Change</button>

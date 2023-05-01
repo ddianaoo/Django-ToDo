@@ -9,7 +9,11 @@
 <form method="POST"  action="">
     {% csrf_token %}
     {{ form.user.as_hidden }}
-    {{ form.title }}
+    {{ form.title.label }}:{{ form.title }}
+    {{ form.desc.label }}:{{ form.desc }}
+    <br>
+    <span>Do you want receive notifications for the tasks of this list?  </span>{{form.invite}}
+    <br>
     <br>
     <button type="submit" class="btn btn-success">Create</button>
 

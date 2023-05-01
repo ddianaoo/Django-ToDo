@@ -6,9 +6,10 @@ class ListForm(forms.ModelForm):
 
     class Meta:
         model = List
-        fields = ['title', 'user']
+        fields = ['title', 'user', 'invite', 'desc']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'})
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'desc': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
         }
 
 
