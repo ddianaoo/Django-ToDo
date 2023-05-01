@@ -35,8 +35,9 @@ class ChangeTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'desc', 'is_done', 'list']
+        fields = ['title', 'desc', 'is_done', 'list', 'photo']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'desc': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+            'photo': forms.FileInput(attrs={'class': 'form-control'})
         }

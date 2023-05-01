@@ -2,18 +2,16 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-<a href="{% url 'list_delete' id %}" class="btn btn-danger" style="float: right;">Delete</a>
+<a href="{% url 'list_delete' id %}" class="btn btn-danger" style="float: right;">Delete List</a>
 <h1>{{title}}</h1>
 {% if tasks %}
 <ol>
 {% for task in tasks %}
 <li>
     <a href="{% url 'task' id task.id %}">{{ task.title }}</a>
-    {% if task.is_done %}
-    <span style="color: green">Done</span>
-    {% else %}
-    <span style="color: red">Didn`t done</span>
-    {% endif %}
+    <a href="{% url 'delete_task' id task.id %}" class="btn btn-danger">Delete</a>
+    <br>
+    <br>
 </li>
 {% endfor %}
 </ol>

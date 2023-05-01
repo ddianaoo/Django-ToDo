@@ -78,7 +78,7 @@ def change_task(request, list_id, task_id):
     task = Task.objects.get(pk=task_id)
 
     if request.method == 'POST':
-        form = ChangeTaskForm(request.POST, initial={'title': task.title, 'is_done': task.is_done, 'list': task.list}, instance=task)
+        form = ChangeTaskForm(request.POST, request.FILES, initial={'title': task.title, 'is_done': task.is_done, 'list': task.list}, instance=task)
         if form.is_valid():
             form.save()
             return redirect('task', list_id, task_id)
