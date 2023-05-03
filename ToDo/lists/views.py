@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 
 def index(request):

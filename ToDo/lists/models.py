@@ -28,7 +28,7 @@ class Task(models.Model):
     at_time = models.TimeField(auto_now=False, auto_now_add=False, blank=False, null=False, default=datetime.now())
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['at_time']
 
     def __str__(self):
         return f"Task name: {self.title} of {self.list}"
