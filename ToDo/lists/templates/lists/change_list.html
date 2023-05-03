@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Change List{% endblock %}
+
+{% block content %}
+<h2>Change Task</h2>
+<br>
+
+<form method="POST"  action="">
+    {% csrf_token %}
+    {{ form.user.as_hidden }}
+    {{ form.title.label }}:{{ form.title }}
+    {{ form.desc.label }}:{{ form.desc }}
+    <br>
+    <span>Do you want receive notifications for the tasks of this list?  </span>{{ form.invite }}
+    <br>
+    <br>
+    <button type="submit" class="btn btn-warning">Change</button>
+
+</form>
+{% endblock %}

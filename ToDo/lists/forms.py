@@ -13,6 +13,17 @@ class ListForm(forms.ModelForm):
         }
 
 
+class ChangeListForm(forms.ModelForm):
+
+    class Meta:
+        model = List
+        fields = ['title', 'user', 'invite', 'desc']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'desc': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+        }
+
+
 class TaskForm(forms.ModelForm):
 
     class Meta:

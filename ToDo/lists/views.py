@@ -8,6 +8,7 @@ def index(request):
     return render(request, 'home.html')
 
 
+#WORK WITH LISTS
 def get_lists(request):
     user = request.user
     lists = List.objects.filter(user__id=user.id)
@@ -40,6 +41,21 @@ def list_create(request):
     return render(request, 'lists/list_create.html', {'form': form})
 
 
+def change_list(request, id):
+    list = List.objects.get(pk=id)
+
+    if request.method == 'POST':
+        form = ChangeListForm(request.POST, initial={'title': list.title, 'user': list.user}, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks', id)
+        else:
+            messages.error(request, form.errors)
+    form = ChangeListForm(initial={'title': list.title, 'user': list.user}, instance=list)
+    return render(request, 'lists/change_list.html', {'form': form})
+
+
+#WORK WITH TASKS
 def get_tasks(request, id):
     try:
         list = List.objects.get(pk=id)
@@ -49,7 +65,7 @@ def get_tasks(request, id):
         messages.error(request, 'You don`t have permission to get details about this list')
         return redirect('lists')
     else:
-        return render(request, 'lists/get_tasks.html', {'title': title, 'tasks': tasks, 'id':id})
+        return render(request, 'lists/get_tasks.html', {'list': list, 'tasks': tasks, 'id':id})
 
 
 def add_task(request, id):

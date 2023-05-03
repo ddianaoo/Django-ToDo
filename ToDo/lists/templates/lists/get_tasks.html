@@ -2,11 +2,12 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center">{{title}}</h1>
-<a href="#" class="btn btn-warning">Change List</a>
+<h1 style="text-align: center">{{list.title}}</h1>
+<a href="{% url 'list_change' id %}" class="btn btn-warning">Change List</a>
 <a href="{% url 'list_delete' id %}" class="btn btn-danger" style="float: right;">Delete List</a>
 <br>
 <br>
+<p>{{list.desc}}</p>
 {% if tasks %}
 <table class="table table-bordered">
     <thead>

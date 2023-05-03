@@ -12,4 +12,5 @@ urlpatterns = [
     path('list/<int:id>/add-task/', login_required(add_task), name='add_task'),
     path('list/create/', login_required(list_create), name='list_create'),
     path('list/<int:id>/delete/', login_required(list_delete), name='list_delete'),
+    path('list/<int:id>/change/', login_required(change_list), name='list_change'),
 ]
