@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import *
 
@@ -45,3 +44,22 @@ def signout(request):
     messages.success(request, 'You are logged out')
     return redirect('home')
 
+
+
+##################### REST
+
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from .serializers import UserSerializer
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    #permission_classes = [IsAdminUser, ]
+    serializer_class = UserSerializer
+
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return User.objects.order_by('-id').all()
+        return []

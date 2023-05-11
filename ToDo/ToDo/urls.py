@@ -24,6 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('lists.urls')),
     path('myauth/', include('myauth.urls')),
+    path('api/users/', include('myauth.rest_urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    #path('api/', include('lists.rest_urls'))
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
