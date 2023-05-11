@@ -114,3 +114,20 @@ def delete_task(request, list_id, task_id):
     else:
         messages.success(request, 'Task was successfully deleted!')
     return redirect('tasks', list_id)
+
+
+
+##################       REST
+
+from rest_framework import viewsets
+from .serializers import ListSerializer, TaskSerializer
+
+
+class ListViewSet(viewsets.ModelViewSet):
+    queryset = List.objects.all()
+    serializer_class = ListSerializer
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all().order_by('-pk')
+    serializer_class = TaskSerializer

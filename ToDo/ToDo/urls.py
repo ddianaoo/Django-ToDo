@@ -26,7 +26,7 @@ urlpatterns = [
     path('myauth/', include('myauth.urls')),
     path('api/users/', include('myauth.rest_urls')),
     path('api-auth/', include('rest_framework.urls')),
-    #path('api/', include('lists.rest_urls'))
+    path('api/', include('lists.rest_urls'))
 ]
 
 if settings.DEBUG:
