@@ -122,7 +122,9 @@ def delete_task(request, list_id, task_id):
 from rest_framework import viewsets
 from .serializers import ListSerializer, TaskSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .permissions import IsOwner, IsNotAllowed
+from .permissions import IsListOwner, IsTaskOwner, IsNotAllowed
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 
 class ListViewSet(viewsets.ModelViewSet):
@@ -138,13 +140,13 @@ class ListViewSet(viewsets.ModelViewSet):
         elif self.request.user.is_authenticated:
 
             if self.action == 'retrieve':
-                self.permission_classes = [IsOwner | IsAdminUser]
+                self.permission_classes = [IsListOwner | IsAdminUser]
 
             if self.action == 'update':
-                self.permission_classes = [IsOwner | IsAdminUser]
+                self.permission_classes = [IsListOwner | IsAdminUser]
 
             if self.action == 'destroy':
-                self.permission_classes = [IsOwner | IsAdminUser]
+                self.permission_classes = [IsListOwner | IsAdminUser]
         else:
             self.permission_classes = [IsNotAllowed, ]
         return super().get_permissions()
@@ -158,5 +160,48 @@ class ListViewSet(viewsets.ModelViewSet):
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by('-pk')
+    #queryset = Task.objects.all().order_by('-pk')
     serializer_class = TaskSerializer
+
+    def get_list_id(self):
+        user_id = self.request.META['PATH_INFO'].split('/')[-3]
+        return user_id
+
+    def create(self, request, list_id):
+        serializer = TaskSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            list_creation_id = serializer.validated_data['list']
+            if list_creation_id == list_id:
+                my_list = List.objects.get(id=list_id)
+                serializer.validated_data['list'] = my_list
+                serializer.save()
+                return Response(serializer.data, status=HTTP_201_CREATED)
+            return Response(f'Ви намагаєтесь присвоїти завдання іншому списку, спробуйте ще раз з id = {list_id}', status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+    def get_permissions(self):
+        if self.action == 'create':
+            self.permission_classes = [IsAuthenticated,]
+        elif self.action == 'list':
+            self.permission_classes = [IsAuthenticated, ]
+
+        elif self.request.user.is_authenticated:
+
+            if self.action == 'retrieve':
+                self.permission_classes = [IsTaskOwner | IsAdminUser]
+
+            if self.action == 'update':
+                self.permission_classes = [IsTaskOwner | IsAdminUser]
+
+            if self.action == 'destroy':
+                self.permission_classes = [IsTaskOwner | IsAdminUser]
+        else:
+            self.permission_classes = [IsNotAllowed, ]
+        return super().get_permissions()
+
+
+    def get_queryset(self):
+        list_id = self.get_list_id()
+        if self.request.user.is_authenticated:
+            return Task.objects.filter(list__id=list_id)
+        return []

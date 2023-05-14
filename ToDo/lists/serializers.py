@@ -15,7 +15,21 @@ class ListSerializer(serializers.ModelSerializer):
         return fields
 
 
+class CurrentListDefault:
+    requires_context = True
+
+    def __call__(self, serializer_field):
+        list_id = serializer_field.context['request'].META['PATH_INFO'].split('/')[-3]
+        print(list_id)
+        return int(list_id)
+
+    def __repr__(self):
+        return '%s()' % self.__class__.__name__
+
+
 class TaskSerializer(serializers.ModelSerializer):
+    list = serializers.HiddenField(default=CurrentListDefault())
+
     class Meta:
         model = Task
         fields = '__all__'
