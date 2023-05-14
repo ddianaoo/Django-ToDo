@@ -20,7 +20,11 @@ class CurrentListDefault:
     requires_context = True
 
     def __call__(self, serializer_field):
-        list_id = serializer_field.context['request'].META['PATH_INFO'].split('/')[-3]
+        my_url = serializer_field.context['request'].META['PATH_INFO'].split('/')
+        if len(my_url) == 6:
+            list_id = my_url[-3]
+        else:
+            list_id = my_url[-4]
         my_list = get_object_or_404(List, id=list_id)
         return my_list
 

@@ -196,5 +196,5 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         list_id = self.get_list_id()
         if self.request.user.is_authenticated:
-            return Task.objects.filter(list__id=list_id)
+            return Task.objects.filter(list__id=list_id).order_by('-id')
         return []
