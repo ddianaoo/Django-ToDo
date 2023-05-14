@@ -1,4 +1,6 @@
 from rest_framework import permissions
+from .models import *
+from django.shortcuts import get_object_or_404
 
 
 class IsNotAllowed(permissions.BasePermission):
@@ -9,7 +11,13 @@ class IsNotAllowed(permissions.BasePermission):
 class IsListOwner(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        if request.user.is_authenticated:
+        my_url = request.META['PATH_INFO'].split('/')
+        if len(my_url) == 6:
+            list_id = my_url[-3]
+        else:
+            list_id = my_url[-2]
+        my_list = get_object_or_404(List, id=int(list_id))
+        if request.user.is_authenticated and my_list.id == request.user.id:
             return True
         return False
 

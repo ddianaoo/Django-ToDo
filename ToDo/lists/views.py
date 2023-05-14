@@ -177,7 +177,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated,]
         elif self.action == 'list':
-            self.permission_classes = [IsAuthenticated, ]
+            self.permission_classes = [IsListOwner, ]
 
         elif self.request.user.is_authenticated:
 
