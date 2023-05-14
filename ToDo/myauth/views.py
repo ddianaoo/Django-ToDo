@@ -65,8 +65,6 @@ class UserViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsAuthenticated, ]
 
         elif self.request.user.is_authenticated:
-            if self.action == 'list':
-                self.permission_classes = [IsAdminUser, ]
 
             if self.action == 'retrieve':
                 self.permission_classes = [IsOwner | IsAdminUser]
