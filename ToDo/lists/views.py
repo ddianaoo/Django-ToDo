@@ -122,13 +122,12 @@ def delete_task(request, list_id, task_id):
 from rest_framework import viewsets
 from .serializers import ListSerializer, TaskSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .permissions import IsListOwner, IsTaskOwner, IsNotAllowed
+from .permissions import IsListOwner, IsTaskOwner, IsNotAllowed, IsListOwnerForTask
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 
 class ListViewSet(viewsets.ModelViewSet):
-    #queryset = List.objects.all()
     serializer_class = ListSerializer
 
     def get_permissions(self):
@@ -177,7 +176,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated,]
         elif self.action == 'list':
-            self.permission_classes = [IsListOwner, ]
+            self.permission_classes = [IsListOwnerForTask, ]
 
         elif self.request.user.is_authenticated:
 
