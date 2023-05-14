@@ -20,8 +20,8 @@ class CurrentListDefault:
 
     def __call__(self, serializer_field):
         list_id = serializer_field.context['request'].META['PATH_INFO'].split('/')[-3]
-        print(list_id)
-        return int(list_id)
+        my_list = List.objects.get(id=list_id)
+        return my_list
 
     def __repr__(self):
         return '%s()' % self.__class__.__name__

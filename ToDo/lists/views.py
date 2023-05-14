@@ -170,13 +170,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     def create(self, request, list_id):
         serializer = TaskSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            list_creation_id = serializer.validated_data['list']
-            if list_creation_id == list_id:
-                my_list = List.objects.get(id=list_id)
-                serializer.validated_data['list'] = my_list
-                serializer.save()
-                return Response(serializer.data, status=HTTP_201_CREATED)
-            return Response(f'Ви намагаєтесь присвоїти завдання іншому списку, спробуйте ще раз з id = {list_id}', status=HTTP_400_BAD_REQUEST)
+            serializer.save()
+            return Response(serializer.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     def get_permissions(self):
@@ -198,7 +193,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         else:
             self.permission_classes = [IsNotAllowed, ]
         return super().get_permissions()
-
 
     def get_queryset(self):
         list_id = self.get_list_id()
