@@ -10,4 +10,6 @@ router.register(r'', ListViewSet, basename='List')
 urlpatterns = [
     path('', include(router.urls)),
     path('<int:list_id>/tasks/', TaskViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('<int:list_id>/tasks/<int:pk>/',
+         TaskViewSet.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update'})),
 ]

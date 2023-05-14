@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Task, List
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 class ListSerializer(serializers.ModelSerializer):
@@ -20,7 +21,7 @@ class CurrentListDefault:
 
     def __call__(self, serializer_field):
         list_id = serializer_field.context['request'].META['PATH_INFO'].split('/')[-3]
-        my_list = List.objects.get(id=list_id)
+        my_list = get_object_or_404(List, id=list_id)
         return my_list
 
     def __repr__(self):

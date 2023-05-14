@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib import messages
 from django.db.models import Q
@@ -160,12 +160,11 @@ class ListViewSet(viewsets.ModelViewSet):
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    #queryset = Task.objects.all().order_by('-pk')
     serializer_class = TaskSerializer
 
     def get_list_id(self):
-        user_id = self.request.META['PATH_INFO'].split('/')[-3]
-        return user_id
+        list_id = self.kwargs['list_id']
+        return list_id
 
     def create(self, request, list_id):
         serializer = TaskSerializer(data=request.data, context={'request': request})
