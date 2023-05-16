@@ -51,7 +51,7 @@ def signout(request):
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from .serializers import UserSerializer
-from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from .permissions import IsOwner, IsNotAllowed, IsSuperUserOrNotAuthenticate
 
 
@@ -62,7 +62,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsSuperUserOrNotAuthenticate,]
         elif self.action == 'list':
-            self.permission_classes = [IsAuthenticated, ]
+            self.permission_classes = [IsAuthenticatedOrReadOnly, ]
 
         elif self.request.user.is_authenticated:
 
